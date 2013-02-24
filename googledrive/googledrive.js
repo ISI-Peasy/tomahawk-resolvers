@@ -64,11 +64,14 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
     init: function () {
         Tomahawk.log("Beginnning INIT of Google Drive resovler");
 		//dbLocal.setItem("expiresOn","1");
-        //Tomahawk.addLocalJSFile("musicManager.js");
+        Tomahawk.addLocalJSFile("musicManager.js");
         
         this.cursor = dbLocal.getItem('cursor','');
         
         this.oauth.init();
+        
+        musicManager.initDatabase() ;
+        this.googleDriveMusicManagerTests() ; 
         
         Tomahawk.log(typeof this.expiresOn );
         Tomahawk.log((Math.floor(Date.now()/1000) ).toString());
@@ -78,7 +81,7 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
 		
   		this.updateDatabase();
     },
-    
+        
     updateDatabase: function(){
 		var that = this;
     	Tomahawk.log("Sending Delta Query : ");
@@ -139,6 +142,24 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
     {
 
     },
+	
+	googleDriveMusicManagerTests: function() {	 
+		 //~ musicManagerTester.flushDatabaseTest() ;
+		 //~ musicManagerTester.init() ;
+		 //~ musicManagerTester.addTrackTest() ;
+		 //~ musicManagerTester.deleteTrackTest() ;
+		 //~ musicManagerTester.resolveTest() ;
+		 //~ musicManagerTester.allArtistsQueryTest() ;
+		 //~ musicManagerTester.tracksQueryTest() ;
+		 //~ musicManagerTester.albumsQueryTest() ;
+		 //~ musicManagerTester.populateDatabase(9) ;
+		 //~ musicManagerTester.showDatabase() ;
+	},
+    
+    getID3Tag: function(fileUrl, callback)
+    {
+		
+	},
     
     onID3TagCallback: function(fileId, tags)
     {
@@ -344,10 +365,11 @@ var dbLocal = {
 			 			result = (result == null)? defaultResponse : result;
 			 			
 			 			Tomahawk.log("DB: loaded "+key+" : '"+ result+"' ");
-			 			
+
 			 			return result; 
 					 }	
 };
+
 
 Tomahawk.resolver.instance = GoogleDriveResolver;
 
