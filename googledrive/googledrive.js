@@ -93,6 +93,8 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
         
         this.oauth.init();
         
+        musicManager.showDatabase();
+        
         Tomahawk.addCustomUrlHandler( "googledrive", "getStreamUrl" );
         Tomahawk.reportCapabilities( TomahawkResolverCapability.Browsable | TomahawkResolverCapability.AccountFactory );
         
@@ -142,7 +144,7 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
 						//Tomahawk.log("size : " + item['file']['fileSize']);
 						//Tomahawk.log("mime : " + item['file']['mimeType']);
 						//Tomahawk.log('url : ' + this.getStreamUrl(item['file']['id']));
-						//Tomahawk.ReadCloudFile(file['originalFilename'], file['id'], file['fileSize'], file['mimeType'], this.oauth.createOauthUrl(file['downloadUrl']), "onID3TagCallback");
+						Tomahawk.ReadCloudFile(file['originalFilename'], file['id'], file['fileSize'], file['mimeType'], this.oauth.createOauthUrl(file['downloadUrl']), "onID3TagCallback");
 				}
 			}
 		}
@@ -242,13 +244,22 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
 	},
 
     onID3TagCallback: function(tags)
-    {
-		//Add track to database
-		//var url = 'googledrive://' + fileId;
-		//dbSql.addTrack
-		Tomahawk.log("Tags : ");
-		Tomahawk.log(DumpObjectIndented(tags));
+    {	
+		var trackInfo = {
+			'id' : tags['fileId'],
+			'url' : 'googledrive://' + tags['fileId'],
+			'title' : tags['track'],
+			'artist' : tags['artist'],
+			'album' : tags['album'],
+			'albumpos' : tags['albumpos'],
+			'year' : tags['year'],
+			'bitrate' : tags['bitrate'],
+			'size' : tags['size'],
+			'duration' : tags['duration'],	
+		};
 		
+		Tomahawk.log("Adding : " + DumpObjectIndented(trackInfo));
+		musicManager.addTrack(trackInfo);		
 	},
     
     //TODO: put that in QTScriptResolverHelper
