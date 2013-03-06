@@ -247,6 +247,7 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
 		 //musicManagerTester.retrieveRowEmptyGenreTest() ;
 		 //musicManagerTester.insertionDuplicateTest() ;
 		 //musicManagerTester.retrieveRowEmptyGenreTest() ;
+		 //musicManagerTester.insertionWithoutCoreTest() ;
 		 //musicManagerTester.showDatabase() ;
 	},
 
