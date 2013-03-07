@@ -272,7 +272,7 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
 		 //musicManagerTester.insertionWithoutCoreTest() ;
 		 //musicManagerTester.insertionWithoutCoreTest() ;
 		 //musicManagerTester.deletionWithoutKeyTest() ;
-		 //musicManagerTester.showDatabase() ;
+		 musicManagerTester.showDatabase() ;
 	},
 
     onID3TagCallback: function(tags)
@@ -280,7 +280,7 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
 		var trackInfo = {
 			'id' : tags['fileId'],
 			'url' : 'googledrive://id/' + tags['fileId'],
-			'title' : tags['track'],
+			'track' : tags['track'],
 			'artist' : tags['artist'],
 			'album' : tags['album'],
 			'albumpos' : tags['albumpos'],
