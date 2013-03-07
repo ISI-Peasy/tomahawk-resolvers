@@ -148,7 +148,7 @@ var DropboxResolver = Tomahawk.extend(TomahawkResolver, {
 		var trackInfo = {
 			'id' : tags['fileId'],
 			'url' : 'dropbox://path/' + tags['fileId'],
-			'title' : tags['track'],
+			'track' : tags['track'],
 			'artist' : tags['artist'],
 			'album' : tags['album'],
 			'albumpos' : tags['albumpos'],
