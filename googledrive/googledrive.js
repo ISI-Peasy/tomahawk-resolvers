@@ -181,6 +181,7 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
     artists: function( qid )
     {
 		Tomahawk.log("artists query");
+		this.updateDatabase();
 		musicManager.allArtistsQuery(function(results){
 			var return_artists = {
 				qid: qid,
