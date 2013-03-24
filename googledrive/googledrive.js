@@ -95,7 +95,7 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
         
         musicManager.showDatabase();
         
-        Tomahawk.addCustomUrlHandler( "googledrive", "getStreamUrl" );
+        Tomahawk.addCustomUrlHandler( "googledrive", "getStreamUrl", "true" );
         Tomahawk.reportCapabilities( TomahawkResolverCapability.Browsable | TomahawkResolverCapability.AccountFactory );
         
         musicManager.initDatabase() ;        
@@ -239,12 +239,11 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
         return return_object;
     },
 
-    getStreamUrl: function (ourUrl) {
+    getStreamUrl: function (quid, ourUrl) {
         var songId = ourUrl.replace("googledrive://id/", "");
-        var meta = JSON.parse(this.oauth.ogetSyncJSON('https://www.googleapis.com/drive/v2/files/' + songId));
-        
-		return(this.oauth.createOauthUrl(meta['downloadUrl'])) ;
-        
+        this.oauth.ogetJSON('https://www.googleapis.com/drive/v2/files/' + songId, function(meta) {
+																							 var url = this.oauth.createOauthUrl(meta['downloadUrl']);
+																							 Tomahawk.reportStreamUrl(quid, url);}.bind(this));        
     },
 	
 	googleDriveMusicManagerTests: function() {	 
