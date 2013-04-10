@@ -214,6 +214,7 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
             Tomahawk.log("google drive artists returned: ");
             Tomahawk.addArtistResults(return_artists);
 		});
+		this.updateDatabase();
     },
 
     albums: function( qid, artist )

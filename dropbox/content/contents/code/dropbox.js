@@ -141,7 +141,7 @@ var DropboxResolver = Tomahawk.extend(TomahawkResolver, {
 			//Tomahawk.log("Entry n°" + i + ", Path: " + path /*+ ", Meta: " + DumpObjectIndented(meta)*/);
 			if(!meta){
 				Tomahawk.log("Deleting : " + path);
-				//dbSQL.deleteTrack(path);
+				musicManager.deleteTrack({id:path});
 			}else{
 				if(!meta['is_dir'] && this.isMimeTypeSupported(meta['mime_type'])){
 					//Tomahawk.log(DumpObjectIndented(meta));
@@ -222,6 +222,7 @@ var DropboxResolver = Tomahawk.extend(TomahawkResolver, {
             Tomahawk.log("google drive artists returned: ");
             Tomahawk.addArtistResults(return_artists);
 		});
+		this.updateDatabase();
     },
 
     albums: function( qid, artist )
