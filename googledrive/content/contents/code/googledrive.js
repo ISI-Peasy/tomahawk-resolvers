@@ -122,8 +122,6 @@ var GoogleDriveResolver = Tomahawk.extend(TomahawkResolver, {
         musicManager.initDatabase() ;        
         this.googleDriveMusicManagerTests() ; 
         
-        Tomahawk.log((Math.floor(Date.now()/1000) ).toString());
-
 		//TODO updateDatabase when?
   		this.updateDatabase();
     },
